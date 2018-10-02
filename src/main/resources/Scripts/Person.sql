@@ -1,0 +1,10 @@
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (100, 'lundsgaard@ca.com', 'Michael', 'Lundsgaard');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (101, 'bokkenheuser@ca.com', 'Morten', 'Bokkenheuser-Bæhr');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (102, 'gulstad@ca.com', 'Johachim', 'Gulstad');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (103, 'accaroli@ca.com', 'Alessandro', 'Accaroli');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (104, 'flynn@ca.com', 'Madeleine', 'Flynn');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (105, 'benson@ca.com', 'Cecile', 'Benson');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (106, 'good@ca.com', 'Della', 'Good');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (107, 'greer@ca.com', 'Shelly', 'Greer');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (108, 'morin@ca.com', 'Holmes', 'Morin');
+INSERT INTO PERSON (ID, EMAIL, FIRSTNAME, LASTNAME) VALUES (109, 'ballard@ca.com', 'Lucinda', 'Ballard');
