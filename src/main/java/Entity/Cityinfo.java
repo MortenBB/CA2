@@ -6,12 +6,15 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,9 +39,19 @@ public class Cityinfo implements Serializable {
     private Integer zip;
     @Size(max = 30)
     @Column(name = "CITY")
-    private String city;
+    private String city;    
+    @OneToMany(mappedBy = "cityinfo")
+    private List<Address> addresses = new ArrayList();
 
     public Cityinfo() {
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void addAddresses(Address a) {
+        addresses.add(a);
     }
 
     public Cityinfo(Integer zip) {
