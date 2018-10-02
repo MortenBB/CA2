@@ -1,3 +1,3 @@
-drop database day1ORM;
-create database day1ORM;
+drop database ca2;
+create database ca2;
 

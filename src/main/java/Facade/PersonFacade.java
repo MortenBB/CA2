@@ -1,6 +1,7 @@
 package Facade;
 
 import Entity.Person;
+import Entity.PersonDTO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,13 +22,13 @@ public class PersonFacade {
         this.emf = emf;
     }
 
-    public Person getPerson(int id) {
+    public PersonDTO getPerson(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {
 
             em.getTransaction().begin();
-            Person p = em.find(Person.class, id);
+            PersonDTO p = new PersonDTO(em.find(Person.class, id));
             em.getTransaction().commit();
             return p;
 
