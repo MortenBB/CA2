@@ -6,12 +6,17 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,7 +41,6 @@ public class Person implements Serializable {
     @NotNull
     @Column(name = "ID")
     private Integer id;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 30)
     @Column(name = "EMAIL")
     private String email;
@@ -45,7 +49,13 @@ public class Person implements Serializable {
     private String firstname;
     @Size(max = 30)
     @Column(name = "LASTNAME")
-    private String lastname;
+    private String lastname;    
+    @ManyToMany
+    private List<Hobby> hobbies = new ArrayList();
+    @OneToMany
+    private List<Phone> phones = new ArrayList();
+    @ManyToOne
+    private Address address;
 
     public Person() {
     }
@@ -53,6 +63,31 @@ public class Person implements Serializable {
     public Person(Integer id) {
         this.id = id;
     }
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void addHobby(Hobby h) {
+        hobbies.add(h);
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void addPhone(Phone p) {
+        phones.add(p);
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
 
     public Integer getId() {
         return id;

@@ -6,12 +6,16 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,8 +28,7 @@ import javax.validation.constraints.Size;
 @Table(name = "ADDRESS")
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
-    , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")
-    , @NamedQuery(name = "Address.findByZip", query = "SELECT a FROM Address a WHERE a.zip = :zip")})
+    , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,12 +38,30 @@ public class Address implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "STREET")
     private String street;
-    @Column(name = "ZIP")
-    private Integer zip;
+    @ManyToOne
+    private Cityinfo cityinfo;
+    @OneToMany(mappedBy = "address")
+    private List<Person> persons = new ArrayList();
 
     public Address() {
     }
 
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void addPerson(Person p) {
+        persons.add(p);
+    }
+
+    public Cityinfo getCityinfo() {
+        return cityinfo;
+    }
+
+    public void setCityinfo(Cityinfo cityinfo) {
+        this.cityinfo = cityinfo;
+    }
+    
     public Address(String street) {
         this.street = street;
     }
@@ -51,14 +72,6 @@ public class Address implements Serializable {
 
     public void setStreet(String street) {
         this.street = street;
-    }
-
-    public Integer getZip() {
-        return zip;
-    }
-
-    public void setZip(Integer zip) {
-        this.zip = zip;
     }
 
     @Override
