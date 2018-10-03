@@ -5,7 +5,7 @@ import Exceptions.NotFoundException;
 import Facade.PersonFacade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import exceptions.ErrorMessage;
+import Exceptions.ErrorMessage;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -40,11 +40,13 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPersonByID(@PathParam("id") int id) throws NotFoundException {
         pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
-
+            
         PersonDTO p = pfacade.getPersonByID(id);
+        System.out.println(p);
         if (p == null) {
+            System.out.println("##YOU'RE IN THE IF-STATEMENT##");
             throw new NotFoundException("No Person with this ID: " + id);
         }
-        return Response.ok().entity(gson.toJson(pfacade.getPersonByID(id))).build();
+        return Response.ok().entity(gson.toJson(p)).build();
     }
 }

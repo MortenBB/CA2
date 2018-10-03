@@ -7,11 +7,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 /**
  *
  * @author Gonners
  */
+@Provider
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -21,7 +23,7 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
     @Override
     public Response toResponse(NotFoundException ex) {
         boolean isDebug = context.getInitParameter("debug").equals("true");
-        exceptions.ErrorMessage err = new exceptions.ErrorMessage(ex, 404, isDebug);
+        ErrorMessage err = new ErrorMessage(ex, 404, isDebug);
         err.setDescription("NotFound");
         return Response.status(404)
                 .entity(gson.toJson(err))

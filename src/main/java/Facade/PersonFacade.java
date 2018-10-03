@@ -26,29 +26,23 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
 
         try {
-
+            Person pers = null;
+            PersonDTO persDTO = null;
+            
             em.getTransaction().begin();
-            PersonDTO p = new PersonDTO(em.find(Person.class, id));
+            pers = em.find(Person.class, id);
+            
+            if (pers != null) {
+                persDTO = new PersonDTO(pers);
+            } 
+            
             em.getTransaction().commit();
-            return p;
+            return persDTO;
 
         } finally {
             em.close();
         }
     }
-
-//    public PersonDTO getPersonByPhone(String phone) {
-//        EntityManager em = emf.createEntityManager();
-//        
-//        try {
-//            
-//            
-//            
-//        } finally {
-//            em.close();
-//        }
-//
-//    }
 
     public Person addPerson(Person p) {
         EntityManager em = emf.createEntityManager();
