@@ -22,7 +22,7 @@ public class PersonFacade {
         this.emf = emf;
     }
 
-    public PersonDTO getPerson(int id) {
+    public PersonDTO getPersonByID(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -36,6 +36,19 @@ public class PersonFacade {
             em.close();
         }
     }
+
+//    public PersonDTO getPersonByPhone(String phone) {
+//        EntityManager em = emf.createEntityManager();
+//        
+//        try {
+//            
+//            
+//            
+//        } finally {
+//            em.close();
+//        }
+//
+//    }
 
     public Person addPerson(Person p) {
         EntityManager em = emf.createEntityManager();
@@ -72,7 +85,7 @@ public class PersonFacade {
         return null;
     }
 
-public Person deletePerson(int id) {
+    public Person deletePerson(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {

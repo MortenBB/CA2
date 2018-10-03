@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -49,7 +51,7 @@ public class Person implements Serializable {
     private String firstname;
     @Size(max = 30)
     @Column(name = "LASTNAME")
-    private String lastname;    
+    private String lastname;
     @ManyToMany
     private List<Hobby> hobbies = new ArrayList();
     @OneToMany
@@ -87,7 +89,6 @@ public class Person implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-    
 
     public Integer getId() {
         return id;
@@ -145,5 +146,5 @@ public class Person implements Serializable {
     public String toString() {
         return "Entity.Person[ id=" + id + " ]";
     }
-    
+
 }

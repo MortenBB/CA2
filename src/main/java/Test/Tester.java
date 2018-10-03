@@ -14,8 +14,9 @@ import javax.persistence.Persistence;
  *
  * @author Morten
  */
+/*
 public class Tester {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("day1ORM");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Person p = new Person();
@@ -27,3 +28,4 @@ public class Tester {
         System.out.println("Book Found: " + em.find(Book.class, 1l));
         em.getTransaction().commit();
 }
+*/
