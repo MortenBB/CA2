@@ -7,6 +7,7 @@ package Test;
 
 import Entity.Hobby;
 import Entity.Person;
+import Entity.Phone;
 import Facade.PersonFacade;
 import java.util.ArrayList;
 import java.util.*;
@@ -24,9 +25,11 @@ public class Tester {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         EntityManager em = emf.createEntityManager();
+        Person p = new Person("Per123", "Per", "Hansen");        
+        Phone ph = new Phone(123456);
+        ph.setPerson(p);
+        p.addPhone(ph);
         em.getTransaction().begin();
-        Person p = new Person("Per123", "Per", "Hansen");
-        
         em.persist(p);
         em.getTransaction().commit();
         em.close();        
@@ -35,6 +38,8 @@ public class Tester {
         populatePeople(12);
         PersonFacade pf = new PersonFacade();
         System.out.println(pf.getPerson(8));
+        pf.deletePerson(8);
+        System.out.println(pf.findFromPhone(123456));
     }
     private static void populatePeople(int amount){
         PersonFacade pf = new PersonFacade();

@@ -88,11 +88,13 @@ public class PersonFacade {
             em.close();
         }
     }
-    public PersonDTO findFromPhone(String phnr){
+    public PersonDTO findFromPhone(int phnr){
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             Phone ph = em.find(Phone.class, phnr);
+            System.out.println(ph);
+            System.out.println(ph.getPerson());
             PersonDTO p = new PersonDTO(em.find(Person.class, ph.getPerson().getId()));
             em.getTransaction().commit();
             return p;
