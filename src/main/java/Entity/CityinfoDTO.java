@@ -7,6 +7,7 @@ public class CityinfoDTO {
 
     private Integer zip;
     private String city;
+
     private List<String> addresses = new ArrayList();
     private List<String> persons = new ArrayList();
 
