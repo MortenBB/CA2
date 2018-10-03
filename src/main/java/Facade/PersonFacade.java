@@ -1,8 +1,11 @@
 package Facade;
 
+import Entity.Address;
+import Entity.Cityinfo;
 import Entity.Person;
 import Entity.PersonDTO;
 import Entity.Phone;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,13 +28,14 @@ public class PersonFacade {
 
     public PersonDTO getPerson(int id) {
         EntityManager em = emf.createEntityManager();
-
         try {
-
             em.getTransaction().begin();
-            PersonDTO p = new PersonDTO(em.find(Person.class, id));
+            Person p = em.find(Person.class, id);
+            System.out.println(p);
+            PersonDTO pdto = new PersonDTO(p);
+            //PersonDTO p = new PersonDTO(em.find(Person.class, id));
             em.getTransaction().commit();
-            return p;
+            return pdto;
 
         } finally {
             em.close();
@@ -92,9 +96,7 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            Phone ph = em.find(Phone.class, phnr);
-            System.out.println(ph);
-            System.out.println(ph.getPerson());
+            Phone ph = em.find(Phone.class, phnr);           
             PersonDTO p = new PersonDTO(em.find(Person.class, ph.getPerson().getId()));
             em.getTransaction().commit();
             return p;
@@ -102,4 +104,19 @@ public class PersonFacade {
             em.close();
         }
     }
+//    public PersonDTO findFromCity(int zip){
+//        EntityManager em = emf.createEntityManager();
+//        try {
+//            em.getTransaction().begin();
+//            Cityinfo ci = em.find(Cityinfo.class, zip);          
+//            List<Address> addresses = em.createNamedQuery("Address.findByZip").getResultList();
+//            for (int i = 0; i < addresses.size(); i++) {
+//                
+//            }
+//            em.getTransaction().commit();
+//            return p;
+//        } finally {
+//            em.close();
+//        }
+//    }
 }

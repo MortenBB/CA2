@@ -53,10 +53,10 @@ public class Person implements Serializable {
     private String firstname;
     @Size(max = 30)
     @Column(name = "LASTNAME")
-    private String lastname;    
+    private String lastname;
     @ManyToMany
-    private List<Hobby> hobbies = new ArrayList();    
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
+    private List<Hobby> hobbies = new ArrayList();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Phone> phones = new ArrayList();
     @ManyToOne
     private Address address;
@@ -71,9 +71,9 @@ public class Person implements Serializable {
     public Person(String email, String firstname, String lastname) {
         this.email = email;
         this.firstname = firstname;
-        this.lastname = lastname;        
+        this.lastname = lastname;
     }
-    
+
     public List<Hobby> getHobbies() {
         return hobbies;
     }
@@ -97,7 +97,6 @@ public class Person implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-    
 
     public Integer getId() {
         return id;
@@ -154,5 +153,5 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "Person: " + "id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + ", address=" + address + '}';
-    }    
+    }
 }

@@ -43,6 +43,13 @@ public class PersonResource {
         pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
         return Response.ok().entity(gson.toJson(pfacade.getPerson(id))).build();
     }
+    @GET
+    @Path("/test/{phone}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findFromPhone(@PathParam("phone") int phone) {
+        pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
+        return Response.ok().entity(gson.toJson(pfacade.findFromPhone(phone))).build();
+    }
 
     @PUT
     @Path("/{id}")
