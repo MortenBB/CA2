@@ -5,6 +5,7 @@
  */
 package Test;
 
+import Entity.Hobby;
 import Entity.Person;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,5 +25,8 @@ public class Tester {
         em.persist(p);
         em.getTransaction().commit();
         em.close();
+        
+        Hobby h = new Hobby("fiske");
+        h.addPersons(p);
     }
 }

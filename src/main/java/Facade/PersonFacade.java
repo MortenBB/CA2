@@ -2,6 +2,7 @@ package Facade;
 
 import Entity.Person;
 import Entity.PersonDTO;
+import Entity.Phone;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -72,7 +73,7 @@ public class PersonFacade {
         return null;
     }
 
-public Person deletePerson(int id) {
+    public Person deletePerson(int id) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -83,6 +84,18 @@ public Person deletePerson(int id) {
             em.getTransaction().commit();
             return p;
 
+        } finally {
+            em.close();
+        }
+    }
+    public PersonDTO findFromPhone(String phnr){
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Phone ph = em.find(Phone.class, phnr);
+            PersonDTO p = new PersonDTO(em.find(Person.class, ph.getPerson().getId()));
+            em.getTransaction().commit();
+            return p;
         } finally {
             em.close();
         }

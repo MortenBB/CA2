@@ -6,6 +6,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class Hobby implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
     @ManyToMany(mappedBy = "hobbies")
-    private List<Person> persons;
+    private List<Person> persons = new ArrayList();
 
     public Hobby() {
     }
@@ -46,8 +47,8 @@ public class Hobby implements Serializable {
         return persons;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
+    public void addPersons(Person p) {
+        persons.add(p);
     }
 
     public Hobby(String description) {
