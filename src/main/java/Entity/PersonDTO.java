@@ -1,5 +1,8 @@
 package Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Morten
@@ -10,17 +13,19 @@ public class PersonDTO {
     private String email;
     private String firstname;
     private String lastname;
+    private List<String> hobbies = new ArrayList();
+    private List<String> phones = new ArrayList();
 
     public PersonDTO(Person person) {
         this.email = person.getEmail();
         this.firstname = person.getFirstname();
         this.lastname = person.getLastname();
-    }
-
-    public PersonDTO(String email, String firstname, String lastname) {
-        this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        for (int i = 0; i < person.getHobbies().size(); i++) {
+            this.hobbies.add(person.getHobbies().get(i).toString());
+        }
+        for (int i = 0; i < person.getPhones().size(); i++) {
+            this.phones.add(person.getPhones().get(i).toString());
+        }
     }
 
     public PersonDTO(int id, String email, String firstname, String lastname) {
@@ -56,6 +61,11 @@ public class PersonDTO {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" + "email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + '}';
     }
 
 }

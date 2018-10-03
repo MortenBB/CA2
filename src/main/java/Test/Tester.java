@@ -16,16 +16,19 @@ import javax.persistence.Persistence;
  */
 /*
 public class Tester {
+<<<<<<< HEAD
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+=======
+
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+>>>>>>> 29adc7e6320c187ae1f8a73196dea3aae3c7827c
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Person p = new Person();
-        em.persist(c);
+        Person p = new Person("Per123", "Per", "Hansen");
+        em.persist(p);
         em.getTransaction().commit();
         em.close();
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
-        System.out.println("Book Found: " + em.find(Book.class, 1l));
-        em.getTransaction().commit();
+    }
 }
 */
