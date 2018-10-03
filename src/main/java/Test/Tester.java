@@ -15,15 +15,14 @@ import javax.persistence.Persistence;
  * @author Morten
  */
 public class Tester {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("day1ORM");
+
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Person p = new Person();
-        em.persist(c);
+        Person p = new Person("Per123", "Per", "Hansen");
+        em.persist(p);
         em.getTransaction().commit();
         em.close();
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
-        System.out.println("Book Found: " + em.find(Book.class, 1l));
-        em.getTransaction().commit();
+    }
 }

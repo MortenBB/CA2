@@ -42,6 +42,14 @@ public class Hobby implements Serializable {
     public Hobby() {
     }
 
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
     public Hobby(String description) {
         this.description = description;
     }
@@ -76,7 +84,7 @@ public class Hobby implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Hobby[ description=" + description + " ]";
+        return description;
     }
     
 }

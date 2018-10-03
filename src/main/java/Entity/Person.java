@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -40,6 +42,7 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Size(max = 30)
     @Column(name = "EMAIL")
@@ -51,8 +54,8 @@ public class Person implements Serializable {
     @Column(name = "LASTNAME")
     private String lastname;    
     @ManyToMany
-    private List<Hobby> hobbies = new ArrayList();
-    @OneToMany
+    private List<Hobby> hobbies = new ArrayList();    
+    @OneToMany(mappedBy = "person")
     private List<Phone> phones = new ArrayList();
     @ManyToOne
     private Address address;
@@ -64,6 +67,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
+    public Person(String email, String firstname, String lastname) {
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;        
+    }
+    
     public List<Hobby> getHobbies() {
         return hobbies;
     }
@@ -143,7 +152,6 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Person[ id=" + id + " ]";
-    }
-    
+        return "Person: " + "id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + ", address=" + address + '}';
+    }    
 }

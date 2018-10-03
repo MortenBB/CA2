@@ -10,6 +10,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -27,7 +28,6 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Phone.findByNum", query = "SELECT p FROM Phone p WHERE p.num = :num")
     , @NamedQuery(name = "Phone.findByDescription", query = "SELECT p FROM Phone p WHERE p.description = :description")})
 public class Phone implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -37,12 +37,22 @@ public class Phone implements Serializable {
     @Size(max = 30)
     @Column(name = "DESCRIPTION")
     private String description;
+    @ManyToOne
+    private Person person;
 
     public Phone() {
     }
 
     public Phone(Integer num) {
         this.num = num;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Integer getNum() {
@@ -83,7 +93,7 @@ public class Phone implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Phone[ num=" + num + " ]";
+        return "Number: " + num + " Description: " + description;
     }
     
 }
