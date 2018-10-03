@@ -5,6 +5,11 @@ public class CityinfoDTO {
     private Integer zip;
     private String city;
 
+    public CityinfoDTO(Cityinfo cityinfo) {
+        this.zip = cityinfo.getZip();
+        this.city = cityinfo.getCity();
+    }
+    
     public CityinfoDTO(Integer zip, String city) {
         this.zip = zip;
         this.city = city;
