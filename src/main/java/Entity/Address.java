@@ -28,7 +28,8 @@ import javax.validation.constraints.Size;
 @Table(name = "ADDRESS")
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
-    , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")})
+    , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")
+    , @NamedQuery(name = "Address.findByZip", query = "SELECT a FROM Address a WHERE a.cityinfo.zip = :cityinfo")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,7 +62,7 @@ public class Address implements Serializable {
     public void setCityinfo(Cityinfo cityinfo) {
         this.cityinfo = cityinfo;
     }
-    
+
     public Address(String street) {
         this.street = street;
     }
@@ -98,5 +99,5 @@ public class Address implements Serializable {
     public String toString() {
         return "Entity.Address[ street=" + street + " ]";
     }
-    
+
 }

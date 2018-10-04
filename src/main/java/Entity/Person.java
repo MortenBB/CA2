@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,8 +55,8 @@ public class Person implements Serializable {
     @Column(name = "LASTNAME")
     private String lastname;
     @ManyToMany
-    private List<Hobby> hobbies = new ArrayList();    
-    @OneToMany(mappedBy = "person")
+    private List<Hobby> hobbies = new ArrayList();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Phone> phones = new ArrayList();
     @ManyToOne
     private Address address;
@@ -70,9 +71,9 @@ public class Person implements Serializable {
     public Person(String email, String firstname, String lastname) {
         this.email = email;
         this.firstname = firstname;
-        this.lastname = lastname;        
+        this.lastname = lastname;
     }
-    
+
     public List<Hobby> getHobbies() {
         return hobbies;
     }
@@ -152,5 +153,5 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "Person: " + "id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + ", address=" + address + '}';
-    }    
+    }
 }
