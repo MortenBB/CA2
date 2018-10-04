@@ -26,11 +26,11 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
 
         try {
-            Person pers = null;
+            //Person pers = null;
             PersonDTO persDTO = null;
             
             em.getTransaction().begin();
-            pers = em.find(Person.class, id);
+            Person pers = em.find(Person.class, id);
             
             if (pers != null) {
                 persDTO = new PersonDTO(pers);

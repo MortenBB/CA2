@@ -17,6 +17,7 @@ public class PersonDTO {
     private List<String> phones = new ArrayList();
 
     public PersonDTO(Person person) {
+        this.id = person.getId();
         this.email = person.getEmail();
         this.firstname = person.getFirstname();
         this.lastname = person.getLastname();
