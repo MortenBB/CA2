@@ -5,10 +5,14 @@
  */
 package Test;
 
+import Entity.Address;
+import Entity.Cityinfo;
 import Entity.Hobby;
 import Entity.Person;
+import Entity.PersonDTO;
 import Entity.Phone;
 import Facade.PersonFacade;
+import Facade.UtilFacade;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.Random;
@@ -27,6 +31,12 @@ public class Tester {
         EntityManager em = emf.createEntityManager();
         Person p = new Person("Per123", "Per", "Hansen");        
         Phone ph = new Phone(123456);
+        Cityinfo ci = new Cityinfo(2820);
+        Address add = new Address("Gentoftegade");
+        add.setCityinfo(ci);
+        ci.addAddresses(add);
+        add.addPerson(p);
+        p.setAddress(add);
         ph.setPerson(p);
         p.addPhone(ph);
         em.getTransaction().begin();
@@ -37,9 +47,16 @@ public class Tester {
         h.addPersons(p);
         populatePeople(12);
         PersonFacade pf = new PersonFacade();
+        UtilFacade uf = new UtilFacade();
         System.out.println(pf.getPerson(8));
         pf.deletePerson(8);
         System.out.println(pf.findFromPhone(123456));
+        //System.out.println(p);
+        PersonDTO pdto = new PersonDTO(p);
+        //System.out.println(pdto);
+        //System.out.println("ALL ZIP:");
+        //System.out.println(uf.getAllZip());
+        System.out.println(pf.findFromCity(2820));
     }
     private static void populatePeople(int amount){
         PersonFacade pf = new PersonFacade();

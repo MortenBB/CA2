@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,6 +30,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
     , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")
+    , @NamedQuery(name = "Address.findPerson", query = "SELECT a FROM Address a WHERE a.persons = :street")
     , @NamedQuery(name = "Address.findByZip", query = "SELECT a FROM Address a WHERE a.cityinfo.zip = :cityinfo")})
 public class Address implements Serializable {
 
@@ -41,7 +43,7 @@ public class Address implements Serializable {
     private String street;
     @ManyToOne
     private Cityinfo cityinfo;
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private List<Person> persons = new ArrayList();
 
     public Address() {
@@ -97,7 +99,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Address[ street=" + street + " ]";
+        return "Address: " + street +", by: " + cityinfo;
     }
 
 }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -39,8 +40,8 @@ public class Cityinfo implements Serializable {
     private Integer zip;
     @Size(max = 30)
     @Column(name = "CITY")
-    private String city;    
-    @OneToMany(mappedBy = "cityinfo")
+    private String city;
+    @OneToMany(mappedBy = "cityinfo", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList();
 
     public Cityinfo() {
@@ -96,7 +97,7 @@ public class Cityinfo implements Serializable {
 
     @Override
     public String toString() {
-        return "Entity.Cityinfo[ zip=" + zip + " ]";
+        return "Postnr.: " + zip + ", by: " + city;
     }
-    
+
 }

@@ -5,10 +5,12 @@ import Entity.Cityinfo;
 import Entity.Person;
 import Entity.PersonDTO;
 import Entity.Phone;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -104,19 +106,21 @@ public class PersonFacade {
             em.close();
         }
     }
-//    public PersonDTO findFromCity(int zip){
-//        EntityManager em = emf.createEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            Cityinfo ci = em.find(Cityinfo.class, zip);          
-//            List<Address> addresses = em.createNamedQuery("Address.findByZip").getResultList();
-//            for (int i = 0; i < addresses.size(); i++) {
-//                
-//            }
-//            em.getTransaction().commit();
-//            return p;
-//        } finally {
-//            em.close();
-//        }
-//    }
+    public ArrayList<PersonDTO> findFromCity(int zip){
+        EntityManager em = emf.createEntityManager();
+        ArrayList<PersonDTO> pdto = new ArrayList();
+        try {
+            em.getTransaction().begin();
+            Query nQuery = em.createNamedQuery("Person.findByCity");
+            nQuery.setParameter("zip", zip);
+            List<Person> persons = nQuery.getResultList();
+            for (int i = 0; i < persons.size(); i++) {
+               pdto.add(new PersonDTO(persons.get(i)));
+            }
+            em.getTransaction().commit();
+            return pdto;
+        } finally {
+            em.close();
+        }
+    }
 }
