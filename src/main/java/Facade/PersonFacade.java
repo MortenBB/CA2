@@ -2,6 +2,7 @@ package Facade;
 
 import Entity.Address;
 import Entity.Cityinfo;
+import Entity.Hobby;
 import Entity.Person;
 import Entity.PersonDTO;
 import Entity.Phone;
@@ -110,14 +111,26 @@ public class PersonFacade {
             em.close();
         }
     }
+    public PersonDTO findFromHobby(String Hobby){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            Hobby hob = em.find(Hobby.class, Hobby);
+            PersonDTO p = new PersonDTO(em.find(Person.class, hob.getPersons()));
+            em.getTransaction().commit();
+            return p;
+        } finally {
+            em.close();
+        }
+    }
+    
 //    public PersonDTO findFromCity(int zip){
 //        EntityManager em = emf.createEntityManager();
 //        try {
 //            em.getTransaction().begin();
 //            Cityinfo ci = em.find(Cityinfo.class, zip);          
 //            List<Address> addresses = em.createNamedQuery("Address.findByZip").getResultList();
-//            for (int i = 0; i < addresses.size(); i++) {
-//                
+//            for (int i = 0; i < addresses.size(); i++) {          
 //            }
 //            em.getTransaction().commit();
 //            return p;

@@ -20,8 +20,8 @@ import javax.persistence.Persistence;
  *
  * @author Morten
  */
-/*
-public class Tester {
+
+/*public class Tester {
 <<<<<<< HEAD
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 =======
@@ -67,4 +67,5 @@ public class Tester {
 	}
 }
 }
+
 */
