@@ -42,22 +42,25 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPersonByID(@PathParam("id") int id) throws NotFoundException {
         pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
-            
-        PersonDTO p = pfacade.getPersonByID(id);
-        System.out.println(p);
-        if (p == null) {
-            System.out.println("##YOU'RE IN THE IF-STATEMENT##");
+
+        PersonDTO persDTO = pfacade.getPersonByID(id);
+        if (persDTO == null) {
             throw new NotFoundException("No Person with this ID: " + id);
         }
-        return Response.ok().entity(gson.toJson(p)).build();
+        return Response.ok().entity(gson.toJson(persDTO)).build();
     }
-    
+
     @GET
-    @Path("/test/{phone}")
+    @Path("/getPhone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findFromPhone(@PathParam("phone") int phone) {
+    public Response findFromPhone(@PathParam("phone") int phone) throws NotFoundException {
         pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
-        return Response.ok().entity(gson.toJson(pfacade.findFromPhone(phone))).build();
+
+        PersonDTO persDTO = pfacade.getPersonByPhone(phone);
+        if (persDTO == null) {
+            throw new NotFoundException("No Person With This Phone nr: " + phone);
+        }
+            return Response.ok().entity(gson.toJson(persDTO)).build();
     }
 
     @PUT
@@ -91,11 +94,11 @@ public class PersonResource {
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletePerson(@PathParam("id") int id) {
         pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
-        String getPersonById = gson.toJson(pfacade.deletePerson(id));
-        return Response.ok().entity(gson.toJson(getPersonById)).build();
+        String jsonPerosn = gson.toJson(pfacade.deletePerson(id));
+        return Response.ok().entity(gson.toJson(jsonPerosn)).build();
     }
 }

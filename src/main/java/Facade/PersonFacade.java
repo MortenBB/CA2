@@ -47,6 +47,24 @@ public class PersonFacade {
             em.close();
         }
     }
+    
+    public PersonDTO getPersonByPhone(int phnr){
+        EntityManager em = emf.createEntityManager();
+        try {
+            PersonDTO persDTO = null;
+            em.getTransaction().begin();
+            Phone ph = em.find(Phone.class, phnr);            
+            
+            if (ph != null) {
+            persDTO = new PersonDTO(em.find(Person.class, ph.getPerson().getId()));
+            }
+            
+            em.getTransaction().commit();
+            return persDTO;
+        } finally {
+            em.close();
+        }
+    }
 
     public Person addPerson(Person p) {
         EntityManager em = emf.createEntityManager();
@@ -87,7 +105,7 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
 
         try {
-
+            
             em.getTransaction().begin();
             Person p = em.find(Person.class, id);
             em.remove(p);
@@ -98,18 +116,7 @@ public class PersonFacade {
             em.close();
         }
     }
-    public PersonDTO findFromPhone(int phnr){
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            Phone ph = em.find(Phone.class, phnr);           
-            PersonDTO p = new PersonDTO(em.find(Person.class, ph.getPerson().getId()));
-            em.getTransaction().commit();
-            return p;
-        } finally {
-            em.close();
-        }
-    }
+    
 //    public PersonDTO findFromCity(int zip){
 //        EntityManager em = emf.createEntityManager();
 //        try {
