@@ -13,6 +13,9 @@ public class PersonDTO {
     private String email;
     private String firstname;
     private String lastname;
+    private String address;
+    private String cityinfo;
+    private int zip;
     private List<String> hobbies = new ArrayList();
     private List<String> phones = new ArrayList();
 
@@ -21,6 +24,10 @@ public class PersonDTO {
         this.email = person.getEmail();
         this.firstname = person.getFirstname();
         this.lastname = person.getLastname();
+        this.address = person.getAddress().getStreet();
+        this.cityinfo = person.getAddress().getCityinfo().getCity();
+        this.zip = person.getAddress().getCityinfo().getZip();
+        
         for (int i = 0; i < person.getHobbies().size(); i++) {
             this.hobbies.add(person.getHobbies().get(i).toString());
         }
@@ -66,7 +73,9 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + '}';
+        return "PersonDTO{" + "id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", address=" + address + ", cityinfo=" + cityinfo + ", hobbies=" + hobbies + ", phones=" + phones + '}';
     }
+
+    
 
 }

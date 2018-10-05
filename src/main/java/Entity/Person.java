@@ -35,6 +35,7 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id")
     , @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email")
     , @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname")
+    , @NamedQuery(name = "Person.findByCity", query = "SELECT p FROM Person p WHERE p.address.cityinfo.zip = :zip")
     , @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname")})
 public class Person implements Serializable {
 
@@ -54,7 +55,7 @@ public class Person implements Serializable {
     @Size(max = 30)
     @Column(name = "LASTNAME")
     private String lastname;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Hobby> hobbies = new ArrayList();
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Phone> phones = new ArrayList();
@@ -73,7 +74,7 @@ public class Person implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-
+    
     public List<Hobby> getHobbies() {
         return hobbies;
     }
@@ -152,6 +153,10 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person: " + "id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + ", address=" + address + '}';
+        return "Person{" + "id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", hobbies=" + hobbies + ", phones=" + phones + ", address=" + address + '}';
     }
+
+  
+
+  
 }

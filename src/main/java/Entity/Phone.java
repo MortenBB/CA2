@@ -28,6 +28,7 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Phone.findByNum", query = "SELECT p FROM Phone p WHERE p.num = :num")
     , @NamedQuery(name = "Phone.findByDescription", query = "SELECT p FROM Phone p WHERE p.description = :description")})
 public class Phone implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -95,5 +96,5 @@ public class Phone implements Serializable {
     public String toString() {
         return "Number: " + num + " Description: " + description;
     }
-    
+
 }

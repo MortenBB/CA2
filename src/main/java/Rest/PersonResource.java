@@ -6,6 +6,7 @@ import Entity.PersonDTO;
 import Facade.PersonFacade;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -56,15 +57,42 @@ public class PersonResource {
     public Response findFromPhone(@PathParam("phone") int phone) throws NotFoundException {
         pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
 
-        PersonDTO persDTO = pfacade.getPersonByPhone(phone);
+        PersonDTO persDTO = pfacade.findFromPhone(phone);
         if (persDTO == null) {
             throw new NotFoundException("No Person With This Phone nr: " + phone);
         }
             return Response.ok().entity(gson.toJson(persDTO)).build();
     }
+    //TODO DOES NOT WORK
+    @GET
+    @Path("/getHobby/{hobby}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findFromHobby(@PathParam("hobby") String hobby) throws NotFoundException {
+        pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
+
+        PersonDTO persDTO = pfacade.findFromHobby(hobby);
+        if (persDTO == null) {
+            throw new NotFoundException("No Person With This Hobby: " + hobby);
+        }
+            return Response.ok().entity(gson.toJson(persDTO)).build();
+    }
+    
+    @GET
+    @Path("/getCity/{zip}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findFromZip(@PathParam("zip") int zip) throws NotFoundException {
+        pfacade.addEntityManagerFactory(Persistence.createEntityManagerFactory("pu"));
+
+        ArrayList<PersonDTO> persDTO = pfacade.findFromCity(zip);
+        if (persDTO == null) {
+            throw new NotFoundException("No Person From This PostalCode: " + zip);
+        }
+            return Response.ok().entity(gson.toJson(persDTO)).build();
+    }
+    
 
     @PUT
-    @Path("/{id}")
+    @Path("edit/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePerson(String content, @PathParam("id") int id) {
