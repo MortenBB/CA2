@@ -55,7 +55,7 @@ public class Person implements Serializable {
     @Size(max = 30)
     @Column(name = "LASTNAME")
     private String lastname;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Hobby> hobbies = new ArrayList();
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Phone> phones = new ArrayList();

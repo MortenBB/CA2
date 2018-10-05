@@ -33,9 +33,7 @@ public class PersonFacade {
         try {
             em.getTransaction().begin();
             Person p = em.find(Person.class, id);
-            System.out.println(p);
             PersonDTO pdto = new PersonDTO(p);
-            //PersonDTO p = new PersonDTO(em.find(Person.class, id));
             em.getTransaction().commit();
             return pdto;
 
