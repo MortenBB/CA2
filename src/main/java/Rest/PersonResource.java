@@ -38,6 +38,12 @@ public class PersonResource {
     public PersonResource() {
     }
 
+    /**
+     * This method gets a person from id
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,6 +57,12 @@ public class PersonResource {
         return Response.ok().entity(gson.toJson(persDTO)).build();
     }
 
+    /**
+     * This method returns a person from phone(number).
+     *
+     * @param phone
+     * @return
+     */
     @GET
     @Path("/getPhone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,9 +73,16 @@ public class PersonResource {
         if (persDTO == null) {
             throw new NotFoundException("No Person With This Phone nr: " + phone);
         }
-            return Response.ok().entity(gson.toJson(persDTO)).build();
+        return Response.ok().entity(gson.toJson(persDTO)).build();
     }
-    //TODO DOES NOT WORK
+
+    /**
+     * This method returns all persons with a given hobby
+     *
+     * @param hobby
+     * @return
+     * @throws NotFoundException
+     */
     @GET
     @Path("/getHobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,9 +93,16 @@ public class PersonResource {
         if (persDTO == null) {
             throw new NotFoundException("No Person With This Hobby: " + hobby);
         }
-            return Response.ok().entity(gson.toJson(persDTO)).build();
+        return Response.ok().entity(gson.toJson(persDTO)).build();
     }
-    
+
+    /**
+     * returns all persons with a given zipCode
+     *
+     * @param zip
+     * @return
+     * @throws NotFoundException
+     */
     @GET
     @Path("/getCity/{zip}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -87,10 +113,17 @@ public class PersonResource {
         if (persDTO == null) {
             throw new NotFoundException("No Person From This PostalCode: " + zip);
         }
-            return Response.ok().entity(gson.toJson(persDTO)).build();
+        return Response.ok().entity(gson.toJson(persDTO)).build();
     }
-    
 
+    /**
+     * This method takes an id and saves the new input to that person id. So it
+     * overwrites the existing data.
+     *
+     * @param content
+     * @param id
+     * @return
+     */
     @PUT
     @Path("edit/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -111,6 +144,12 @@ public class PersonResource {
         return Response.ok().entity(gson.toJson(savedPers)).build();
     }
 
+    /**
+     * Create a new Person given a JSON object
+     *
+     * @param content
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -121,6 +160,12 @@ public class PersonResource {
         return Response.ok().entity(gson.toJson(newPerson)).build();
     }
 
+    /**
+     * Delete a person with a given id.
+     *
+     * @param id
+     * @return
+     */
     @DELETE
     @Path("delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
