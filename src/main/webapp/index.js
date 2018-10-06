@@ -1,6 +1,8 @@
 //import 'bootstrap/dist/css/bootstrap.css'
 const URL = "https://accaroli.com/CA2-1.2/api/Person/";
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 document.getElementById("buttonGET").addEventListener("click", getPersByID);
 function getPersByID() {
     const fetchID = document.getElementById("GET").value;
@@ -14,15 +16,13 @@ function getPersByID() {
             }
             else {
                 console.log("RESOLVED OK: " + JSON.stringify(json));
-                document.getElementById("fetchedGET").innerHTML =
-                    "<br/>" + json.firstname + " " + json.lastname +
-                    "<br/>" + json.email +
-                    "<br/>" + json.phones +
-                    "<br/>" + json.hobbies;
+                printPerson("fetchedGET", json);
             }
         })
         .catch((json) => { console.log("REJECTED: " + JSON.stringify(json)); });
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 document.getElementById("buttonPersByPhone").addEventListener("click", getPersByPhone);
 function getPersByPhone() {
@@ -37,17 +37,44 @@ function getPersByPhone() {
             }
             else {
                 console.log("RESOLVED OK: " + JSON.stringify(json));
-                document.getElementById("fetchedPersByPhone").innerHTML =
-                    "<br/>" + json.firstname + " " + json.lastname +
-                    "<br/>" + json.email +
-                    "<br/>" + json.phones +
-                    "<br/>" + json.hobbies;
+                printPerson("fetchedPersByPhone", json);
+            }
+        })
+        .catch((json) => { console.log("REJECTED: " + JSON.stringify(json)); });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+document.getElementById("buttonPersByZip").addEventListener("click", getPersByZip);
+function getPersByZip() {
+    const fetchZip = document.getElementById("fetchByZip").value;
+
+    fetchJsonPromise(URL + "getCity/" + fetchZip, "GET")
+        .then((json) => {
+            if (json.code) {
+                console.log("RESOLVED NOTOK: " + JSON.stringify(json));
+                document.getElementById("fetchedPersByZip").innerHTML =
+                "<br/>Beklager, din søgning efter" + fetchZip + " gav desværrer intet resultat.";
+            }
+            else {
+                console.log("RESOLVED OK: " + JSON.stringify(json));
+                printPerson("fetchedPersByZip", json);
             }
         })
         .catch((json) => { console.log("REJECTED: " + JSON.stringify(json)); });
 }
 
 //////////////////////////////////////////// HELPER FUNCTION ////////////////////////////////////////////
+
+function printPerson(p, json) {
+    document.getElementById(p).innerHTML =
+        "<br/>" + json.firstname + " " + json.lastname +
+        "<br/>" + json.email +
+        "<br/>" + json.phones +
+        "<br/>" + json.address +
+        "<br/>" + json.cityinfo + " " + json.zip +
+        "<br/>" + json.hobbies.join(", ");
+}
 
 const fetchJsonPromise = (requestURL, requestMethod, requestBody) => {
     const options = {
@@ -63,8 +90,3 @@ const fetchJsonPromise = (requestURL, requestMethod, requestBody) => {
         .then(response => { return response.json(); })
         .catch(error => { return Promise.reject({ status: "Network error", msg: "Unable to process request" }); });
 }
-
-
-
-
-
