@@ -1,5 +1,5 @@
 //import 'bootstrap/dist/css/bootstrap.css'
-const URL = "https://accaroli.com/CA2-1.2/";
+const URL = "https://accaroli.com/CA2-1.2/api/Person/";
 
 document.getElementById("buttonGET").addEventListener("click", getPersByID);
 function getPersByID() {
