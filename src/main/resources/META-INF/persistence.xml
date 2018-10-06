@@ -9,7 +9,9 @@
         <class>Entity.Cityinfo</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pu?useSSL=false"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://139.59.130.118:3306/pu?useSSL=false"/>
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://207.154.238.54:3306/ca2?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+            -->
             <property name="javax.persistence.jdbc.user" value="alek"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.password" value="Pyg25ckd"/>
