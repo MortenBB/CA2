@@ -1,10 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Course Assignment 2</h1>
+    <em>
+      Denne CA er udført af Alessandro Accaroli, Johachim Gulstad, Michael Lundsgaard og Morten Bokkenheuser-Bæhr.<br>
+      TODO: LAV MERE TEXT.
+    </em>
+  </div>
+  <br />
+  <br />
+  <div class="container" id="basicCRUD">
+    <h3>Basic CRUD funktioner</h3>
+
+    <input type="number" id="GET" placeholder="Indsæt id">
+    <button id=buttonGET>Søg</button>
+    <p id="fetchedGET"></p>
+
+    <input type="number" id="POST" placeholder="TODO">
+    <button id=buttonPOST>Søg</button>
+    <p id="fetchedPOST"></p>
+
+    <input type="number" id="PUT" placeholder="TODO">
+    <button id=buttonPUT>Søg</button>
+    <p id="fetchedPUT"></p>
+
+    <input type="number" id="PUT" placeholder="TODO">
+    <button id=buttonPUT>Søg</button>
+    <p id="fetchedPUT"></p>
+    <p>TODO: FÆRDIGGØR INPUT FELTER</p>
+
+  </div>
+  <br />
+  <br />
+  <div class="container" id="fetchPers">
+    <h3>Søg Telefon, Hobby, Addresse, Postnr</h3>
+
+    <input type="number" id="fetchByPhone" placeholder="Indsæt telefon">
+    <button id=buttonPersByPhone>Søg</button>
+    <p id="fetchedPersByPhone"></p>
+
+    <input type="text" id="fetchByHobby" placeholder="Indsæt hobby">
+    <button id=buttonPersByHobby>Søg</button>
+    <p id="fetchedPersByHobby"></p>
+
+    <input type="text" id="fetchByCity" placeholder="Indsæt addresse">
+    <button id=buttonPersByCity>Søg</button>
+    <p id="fetchedPersByCity"></p>
+
+    <input type="number" id="fetchByZip" placeholder="Indsæt postnr">
+    <button id=buttonPersByZip>Søg</button>
+    <p id="fetchedPersByZip"></p>
+
+
+
+
+  </div>
+
+  <br />
+  <br />
+  <script src="index.js"></script>
+  <!--<script src="bundle.js"></script>-->
+</body>
+
 </html>

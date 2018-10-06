@@ -20,13 +20,10 @@ import javax.persistence.Persistence;
  *
  * @author Morten
  */
-/*
-public class Tester {
 
 
 public class Tester {
-<<<<<<< HEAD
->>>>>>> 42da7e413c24c17e7e5ca60b6bbe1d5065fec384
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 
     public static void main(String[] args) {
@@ -46,7 +43,7 @@ public class Tester {
         PersonFacade pf = new PersonFacade();
         //System.out.println(pf.getPersonByID(8));
       //  pf.deletePerson(8);
-        System.out.println(pf.getPersonByPhone(123456));
+        System.out.println(pf.findFromPhone(123456));
     }
 
     private static void populatePeople(int amount) {
@@ -71,4 +68,3 @@ public class Tester {
     }
 }
 
-*/
